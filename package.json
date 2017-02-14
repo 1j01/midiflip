@@ -1,16 +1,31 @@
 {
   "name": "midiflip",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Transform MIDI files mathematically",
   "author": "Isaiah Odhner <isaiahodhner@gmail.com>",
   "license": "MIT",
-  "main": "index.html",
   "repository": {
     "type": "git",
     "url": "http://github.com/1j01/midiflip.git"
   },
   "bugs": {
     "url": "http://github.com/1j01/midiflip/issues"
+  },
+  "keywords": [
+    "midi",
+    "flip",
+    "midiflip",
+    "transform",
+    "midi-file",
+    "midi-events",
+    "remix",
+    "remixer",
+    "remixes",
+    "music"
+  ],
+  "main": "src/midiflip.js",
+  "bin": {
+    "midiflip": "src/cli.js"
   },
   "dependencies": {
     "glob": "^7.1.1",
@@ -19,7 +34,7 @@
     "mkdirp": "^0.5.1"
   },
   "scripts": {
-    "do-single": "node src/cli.js -i node_modules/midifile/sounds/Avgvst/Danger.mid -o transformed.mid",
-    "start": "node src/cli.js -i \"node_modules/midifile/sounds/*/*.mid\" -o \"./transformed/\""
+    "do-single": "midiflip -i node_modules/midifile/sounds/Avgvst/Danger.mid -o transformed.mid",
+    "start": "midiflip -i \"node_modules/midifile/sounds/*/*.mid\" -o \"./transformed/\""
   }
 }
