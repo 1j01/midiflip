@@ -19,6 +19,7 @@
     "mkdirp": "^0.5.1"
   },
   "scripts": {
-    "start": "node src/cli.js -i node_modules/midifile/sounds/Avgvst/Danger.mid -o transformed.mid"
+    "do-single": "node src/cli.js -i node_modules/midifile/sounds/Avgvst/Danger.mid -o transformed.mid",
+    "start": "node src/cli.js -i \"node_modules/midifile/sounds/*/*.mid\" -o \"./transformed/\""
   }
 }
