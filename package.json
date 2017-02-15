@@ -1,6 +1,6 @@
 {
   "name": "midiflip",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Transform MIDI files mathematically",
   "author": "Isaiah Odhner <isaiahodhner@gmail.com>",
   "license": "MIT",
@@ -35,6 +35,7 @@
   },
   "scripts": {
     "do-single": "midiflip -i node_modules/midifile/sounds/Avgvst/Danger.mid -o transformed.mid",
-    "start": "midiflip -i \"node_modules/midifile/sounds/*/*.mid\" -o \"./transformed/\""
+    "do": "midiflip -i \"node_modules/midifile/sounds/*/*.mid\" -o \"./transformed/\"",
+    "do-mess-with-percussion": "midiflip -i \"node_modules/midifile/sounds/*/*.mid\" -o \"./transformed/\" -p"
   }
 }

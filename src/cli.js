@@ -6,7 +6,7 @@ var input_path = argv.input || argv.i;
 var output_path = argv.output || argv.o;
 var mess_with_percussion = argv.percussion || argv.p;
 
-var fn = function(n){
+var fn = function(n, event){
 	return 127 - n;
 };
 

@@ -11,9 +11,12 @@ You'll be able to batch convert a bunch of files by specifying a glob on the CLI
 
 ## Limitations
 
-* Currently all percussion is switched around,
-which is pretty interesting musically, so that'll be an option,
-but it won't be the default behavior.
+* Percussion via the drum kit instruments of [General MIDI Level 2](https://en.wikipedia.org/wiki/General_MIDI_Level_2#Drum_sounds)
+gets mangled regardless of the `--percussion` option.
+Only channel 10 (which is reserved for percussion) is regarded as percussion for now.
+
+* You can't transpose notes back to reasonable ranges by looking at the original ranges,
+you only get a single note at a time to look at and change.
 
 * MidiFlip doesn't deal with time at all,
 so it doesn't let you reverse a MIDI or change the duration of notes or the tempo.
@@ -51,6 +54,11 @@ creating matching subdirectories,
 but stripping off anything before the first `*`,
 so you'll get e.g. `transformed/Avgvst/FreeRide.mid`
 rather than `transformed/midis/Avgvst/FreeRide.mid`
+
+### Mess with percussion
+
+Add `-p` or `--percussion` to apply the same transformation to the percussion channel as to other notes.
+Which doesn't make the semantic sense that applying it to pitch does.
 
 
 ## License (MIT)
