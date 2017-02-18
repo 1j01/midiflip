@@ -10,6 +10,53 @@ var fn = function(n, event){
 	return 127 - n;
 };
 
+// var fn = function(n, event){
+// 	return (100 - n) % 127;
+// };
+
+// var partially_shuffle = function(arr){
+// 	for(var i = 0; i < arr.length / 2; i++){
+// 		var index_a = ~~(Math.random() * arr.length);
+// 		// var index_b = ~~(Math.random() * arr.length);
+// 		var index_b = (index_a + ~~(Math.random() * 5)) % arr.length;
+// 		var a = arr[index_a];
+// 		var b = arr[index_b];
+// 		arr[index_a] = b;
+// 		arr[index_b] = a;
+// 	}
+// };
+// 
+// var mapping = [];
+// for(var i = 0; i < 128; i++){
+// 	mapping[i] = i;
+// }
+// partially_shuffle(mapping);
+// console.log("Using mapping = " + JSON.stringify(mapping));
+// var fn = function(n, event){
+// 	return mapping[n];
+// };
+
+// var mapping = [];
+// // for(var i = 0; i < 128; i++){
+// // 	mapping[i] = i;
+// // }
+// // for(var i = 0; i < 128; i++){
+// // 	mapping[i] = 127 - i;
+// // }
+// for(var i = 0; i < 128; i++){
+// 	mapping[i] = (i % 9) * (i % 7) + 24;
+// }
+// for(var i = 0; i < 128; i++){
+// 	mapping[i] = ((i % 12) * (i ^ 12) - i + 127) % 127;
+// }
+// console.log("mapping = " + JSON.stringify(mapping));
+// var fn = function(n, event){
+// 	return mapping[n];
+// };
+// var fn = function(n, event){
+// 	return (n + (event.channel - 4) * 12) % (127 - 12 * 2);
+// };
+
 var fs = require("fs");
 var path = require("path");
 var mkdirp = require("mkdirp");
@@ -40,3 +87,4 @@ if(glob.hasMagic(input_path)){
 	transform_file(input_path, output_path);
 }
 
+// console.log("mapping = " + JSON.stringify(mapping));
