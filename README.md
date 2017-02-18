@@ -6,7 +6,7 @@ Made for/inspired by Andrew Huang's [#MidiFlip "challenge"](https://youtu.be/4IA
 MidiFlip can be used to simply flip notes around,
 but it also gives you raw control over the notes in a simple way so you can make arbitrary remappings.
 
-You'll be able to batch convert a bunch of files by specifying a glob on the CLI.
+You can batch convert a bunch of files by specifying a glob on the CLI.
 
 
 ## Limitations
@@ -23,15 +23,20 @@ so it doesn't let you reverse a MIDI or change the duration of notes or the temp
 That would be a bit more complicated than just updating pitches.
 But just updating pitches was pretty easy, so...
 
+* MidiFlip doesn't handle pitch bending like [AutoMIDIFlip](http://automidiflip.com/) does.
+
 * I haven't made it into a web app just yet :)
 
 
-## CLI Usage
+## CLI Installation
 
 Install [Node.js](https://nodejs.org/) if you haven't already.
 Then open a terminal/command prompt and enter `npm install midiflip -g`
 
 You should now have access to the `midiflip` command.
+
+
+## CLI Usage
 
 Go to where you have some MIDI files stored,
 such as your music folder,
@@ -55,10 +60,11 @@ but stripping off anything before the first `*`,
 so you'll get e.g. `transformed/Avgvst/FreeRide.mid`
 rather than `transformed/midis/Avgvst/FreeRide.mid`
 
-### Mess with percussion
 
-Add `-p` or `--percussion` to apply the same transformation to the percussion channel as to other notes.
-Which doesn't make the semantic sense that applying it to pitch does.
+### Purposefully mess with percussion
+
+Add `-p` or `--percussion` to apply the same transformation to the percussion channel as to other notes,
+which doesn't make the semantic sense that applying it to pitch does.
 
 
 ## License (MIT)
