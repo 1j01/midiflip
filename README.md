@@ -8,8 +8,14 @@ but it also gives you raw control over the notes in a simple way so you can make
 
 You can batch convert a bunch of files by specifying a glob on the CLI.
 
+[Try MidiFlip online.](http://1j01.github.io/midiflip/)
+
 
 ## Limitations
+
+* The web interface doesn't let you download a zip of all the transformed MIDI files yet.
+
+* The web interface only lets you apply the most basic flip for now.
 
 * Percussion via the drum kit instruments of [General MIDI Level 2](https://en.wikipedia.org/wiki/General_MIDI_Level_2#Drum_sounds)
 gets mangled regardless of the `--percussion` option.
@@ -24,8 +30,6 @@ That would be a bit more complicated than just updating pitches.
 But just updating pitches was pretty easy, so...
 
 * MidiFlip doesn't handle pitch bending like [AutoMIDIFlip](http://automidiflip.com/) does.
-
-* I haven't made it into a web app just yet :)
 
 
 ## CLI Installation
