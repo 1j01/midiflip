@@ -49,18 +49,17 @@
 		padding: 0.5em;
 		border-radius: 2px;
 	}
-	li a {
-		color: inherit;
-	}
 	.error {
 		color: #ff5722;
+	}
+	a {
+		color: inherit;
+		text-decoration: underline;
 	}
 </style>
 <h1>MidiFlip</h1>
 <h2>Transform MIDI files mathematically</h2>
-<p>Drag and drop some MIDI files or select them.</p>
-<!-- TODO: replace this input with a button that creates an input internally -->
-<input type="file" id="files-input" multiple />
+<p>Drag and drop some MIDI files or <a role="button" href="#" id="select-files">select files</a> to transform.</p>
 <output>
 	<h3>Results</h3>
 	<ul id="output-list"></ul>
