@@ -3,18 +3,69 @@
 <head>
 <title>#MidiFlip</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="lib/midi/MIDIEvents.js"></script>
+<script src="lib/midi/MIDIFile.js"></script>
+<script src="src/midiflip.js"></script>
+<!--<script src="lib/zip-js/zip.js"></script>-->
+<!--<script>zip.workerScriptsPath = "lib/zip-js/";</script>-->
 </head>
 <body>
-<script src="lib/coffee-script.js"></script>
-<script src="src/app.js"></script>
 <style>
+	html,
 	body {
-		background: #222;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	body {
+		background: #00BCD4;
 		color: white;
 		font-family: sans-serif;
-		text-shadow: .09em .09em 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+		padding: 1em;
+	    box-sizing: border-box;
+	}
+	h1 {
+		font-size: 3em;
+	}
+	h2 {
+		font-size: 2em;
+	}
+	h3 {
+		font-size: 1.7em;
+	}
+	h1, h2, h3, h4, h5, h6 {
+		margin: 1.5rem 0;
+		text-shadow: 0 .04em 1px rgba(0, 0, 0, 0.5), 0px 0px 1px rgba(0, 0, 0, 0.5);
+	}
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		background: white;
+		color: rgba(0, 0, 0, 0.7);
+		list-style: none;
+		margin: 1em 0;
+		padding: 0.5em;
+		border-radius: 2px;
+	}
+	li a {
+		color: inherit;
+	}
+	.error {
+		color: #ff5722;
 	}
 </style>
 <h1>MidiFlip</h1>
 <h2>Transform MIDI files mathematically</h2>
+<p>Drag and drop some MIDI files or select them.</p>
+<!-- TODO: replace this input with a button that creates an input internally -->
+<input type="file" id="files-input" multiple />
+<output>
+	<h3>Results</h3>
+	<ul id="output-list"></ul>
+	<button id="clear-results">Clear Results</button>
+</output>
+
+<script src="src/app.js"></script>
 </body>
