@@ -17,10 +17,9 @@ var clearResults = function(){
 	}
 };
 
-clear_results_el.addEventListener("click", clearResults)
+clear_results_el.addEventListener("click", clearResults);
 
 var addFile = function(file){
-	console.log("add file", file);
 	var file_reader = new FileReader();
 	file_reader.onload = function(){
 		try {
@@ -55,7 +54,6 @@ var addFile = function(file){
 };
 
 var addFiles = function(files){
-	console.log("add files", files);
 	for(var i=0; i<files.length; i++){
 		var file = files[i];
 		addFile(file);
@@ -63,26 +61,22 @@ var addFiles = function(files){
 };
 
 drop_area_el.addEventListener('dragover', function (e) {
-	// console.log("dragover");
 	e.preventDefault();
 	e.dataTransfer.dropEffect = 'move';
 }, false);
 
 drop_area_el.addEventListener('dragenter', function (e) {
-	// console.log("dragenter");
 	e.preventDefault();
 	e.dataTransfer.dropEffect = 'move';
 }, false);
 
 drop_area_el.addEventListener('drop', function (e) {
-	console.log("drop");
 	e.stopPropagation();
 	e.preventDefault();
 	addFiles(e.dataTransfer.files);
 }, false);
 
 files_input_el.addEventListener("change", function(){
-	console.log("files inputted");
 	addFiles(this.files);
 });
 
