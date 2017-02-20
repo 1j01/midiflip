@@ -6,8 +6,8 @@
 <script src="lib/midi/MIDIEvents.js"></script>
 <script src="lib/midi/MIDIFile.js"></script>
 <script src="src/midiflip.js"></script>
-<!--<script src="lib/zip-js/zip.js"></script>-->
-<!--<script>zip.workerScriptsPath = "lib/zip-js/";</script>-->
+<script src="lib/zip-js/zip.js"></script>
+<script>zip.workerScriptsPath = "lib/zip-js/";</script>
 </head>
 <body>
 <style>
@@ -54,7 +54,10 @@
 	}
 	a {
 		color: inherit;
-		text-decoration: underline;
+	}
+	progress {
+		/* maybe float: right; instead? */
+		display: block;
 	}
 </style>
 <h1>MidiFlip</h1>
@@ -63,6 +66,7 @@
 <output>
 	<h3>Results</h3>
 	<ul id="output-list"></ul>
+	<ul id="output-zipped"></ul>
 	<button id="clear-results">Clear Results</button>
 </output>
 

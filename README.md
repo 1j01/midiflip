@@ -6,14 +6,12 @@ Made for/inspired by Andrew Huang's [#MidiFlip "challenge"](https://youtu.be/4IA
 MidiFlip can be used to simply flip notes around,
 but it also gives you raw control over the notes in a simple way so you can make arbitrary remappings.
 
-You can batch convert a bunch of files by specifying a glob on the CLI.
-
 [Try MidiFlip online.](http://1j01.github.io/midiflip/)
+You can batch convert files and download the results as a zip file.
+(The files are not uploaded to a server.)
 
 
 ## Limitations
-
-* The web interface doesn't let you download a zip of all the transformed MIDI files yet.
 
 * The web interface only lets you apply the most basic flip for now.
 
@@ -35,7 +33,7 @@ But just updating pitches was pretty easy, so...
 ## CLI Installation
 
 Install [Node.js](https://nodejs.org/) if you haven't already.
-Then open a terminal/command prompt and enter `npm install midiflip -g`
+Then open a terminal/command prompt and run `npm install midiflip -g`
 
 You should now have access to the `midiflip` command.
 
