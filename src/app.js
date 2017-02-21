@@ -3,6 +3,7 @@ var drop_area_el = document.querySelector("body");
 var select_files_el = document.querySelector("#select-files");
 var output_list_el = document.querySelector("#output-list");
 var output_zipped_el = document.querySelector("#output-zipped");
+var results_container_el = document.querySelector("#results-container");
 var clear_results_el = document.querySelector("#clear-results");
 
 var fn = function(n){
@@ -11,16 +12,21 @@ var fn = function(n){
 
 var files = {};
 var blob_urls = [];
-var zip_blob_url;
+var zip_blob_url = null;
 
 var clearResults = function(){
-	output_list_el.innerHTML = "";
-	output_zipped_el.innerHTML = "";
 	for(var i=0; i<blob_urls.length; i++){
 		URL.revokeObjectURL(blob_urls[i]);
 	}
+	files = {};
+	blob_urls = [];
+	zip_blob_url = null;
+	results_container_el.style.display = "none";
+	output_list_el.innerHTML = "";
+	output_zipped_el.innerHTML = "";
 };
 
+clearResults();
 clear_results_el.addEventListener("click", clearResults);
 
 var selectFiles = function(){
@@ -71,11 +77,14 @@ var addFile = function(file){
 };
 
 var addFiles = function(files){
+	results_container_el.style.display = "block";
 	for(var i=0; i<files.length; i++){
 		var file = files[i];
 		addFile(file);
 	}
-	createZip();
+	if(files.length > 0){
+		createZip();
+	}
 };
 
 drop_area_el.addEventListener('dragover', function (e) {
@@ -102,38 +111,35 @@ var createZip = function(){
 	output_zipped_el.appendChild(li);
 	var a = document.createElement("a");
 	li.appendChild(a);
-	a.textContent = "transformed.zip (download all files)";
+	a.textContent = "transformed.zip";
 	a.download = "transformed.zip";
 	var progress_bar = document.createElement("progress");
 	li.appendChild(progress_bar);
 	
 	// use a BlobWriter to store the zip into a Blob object
 	zip.createWriter(new zip.BlobWriter(), function(writer) {
-		var file_write_queue = [];
+		var to_write = [];
 		for(var file_name in files){
 			var file = files[file_name];
-			file_write_queue.push({file_name: file_name, file: file});
+			to_write.push({file_name: file_name, file: file});
 		}
+		var to_write_index = 0;
 		var write_remaining_files = function(){
 			
-			var item = file_write_queue.pop();
+			var item = to_write[to_write_index];
 			if(item){
 				var file = item.file;
 				var file_name = item.file_name;
 				
-				console.log("write next file", item);
-				
 				writer.add(file_name, new zip.BlobReader(file), function() {
 					// onsuccess callback
+					to_write_index++;
 					write_remaining_files();
 				}, function(currentIndex, totalIndex) {
 					// onprogress callback
-					console.log(file_name, currentIndex, "/", totalIndex);
-					progress_bar.max = totalIndex;
-					progress_bar.value = currentIndex;
+					progress_bar.value = (to_write_index + currentIndex / totalIndex) / to_write.length;
 				});
 			}else{
-				console.log("wrote all files");
 				// finish writing
 				writer.close(function(zip_blob) {
 					zip_blob_url = URL.createObjectURL(zip_blob);
@@ -151,10 +157,6 @@ var createZip = function(){
 		var error_el = document.createElement("div");
 		error_el.classList.add("error");
 		li.appendChild(error_el);
-		if(error.message.match("somethingingingingn")){
-			error_el.textContent = "custom emeesssiasge.";
-		}else{
-			error_el.textContent = error;
-		}
+		error_el.textContent = error;
 	});
 };
