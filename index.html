@@ -6,6 +6,7 @@
 <script src="lib/midi/MIDIEvents.js"></script>
 <script src="lib/midi/MIDIFile.js"></script>
 <script src="src/midiflip.js"></script>
+<script src="lib/async.js"></script>
 <script src="lib/zip-js/zip.js"></script>
 <script>zip.workerScriptsPath = "lib/zip-js/";</script>
 </head>
@@ -48,7 +49,6 @@
 	}
 	h4 {
 		font-size: 1.2em;
-		/*margin: 0.5rem 0;*/
 	}
 	ul {
 		margin: 0;
@@ -79,12 +79,14 @@
 	<a role="button" href="#" id="select-files" accept="audio/midi">select files</a>
 	to transform.
 </p>
-<output id="results-container">
+<output id="results-container" hidden>
 	<h3>Results</h3>
 	<ul id="output-list"></ul>
-	<h4>Zipped Results</h4>
-	<ul id="output-zipped"></ul>
-	<button id="clear-results">Clear Results</button>
+	<div id="results-zipped-container" hidden>
+		<h4>Zipped Results</h4>
+		<ul id="output-zipped"></ul>
+		<button id="clear-results">Clear Results</button>
+	</div>
 </output>
 
 <script src="src/app.js"></script>
