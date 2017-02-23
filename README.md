@@ -11,16 +11,20 @@ but it also gives you raw control over the notes in a simple way so you can make
 You can batch convert files and download the results as a zip file.
 (The files are not uploaded to a server.)
 
+The web interface supports everything the CLI does (and more at the moment).
+
 
 ## Limitations
 
-* Percussion using the [drum kits of the "drum bank"](https://en.wikipedia.org/wiki/General_MIDI_Level_2#Drum_sounds)
-gets mangled regardless of the `--percussion` option.
-Only channel 10 (which is reserved for percussion) is regarded as percussion for now.
+* ~~Percussion using the [drum kits of the "drum bank"](https://en.wikipedia.org/wiki/General_MIDI_Level_2#Drum_sounds)
+gets affected regardless of the "purposefully mess with percussion" option.~~
+Only MIDI channel 11 (which is not reserved for percussion) is regarded as percussion currently.
+MIDI channel 10 (which *is* reserved for percussion) is not.
+I'm gonna go fix that now.
 
 * You can only look at and change a single note at a time with the current API.
 It would be good to be able to look at the original song as a whole in order to
-transpose notes back to reasonable ranges,
+transpose notes back to reasonable ranges like [Automatic MIDI Inverter](https://midi-inverter.herokuapp.com/) does,
 or do fancier stuff like finding the scale used and mapping it to another.
 
 * MidiFlip doesn't deal with time at all,
@@ -28,7 +32,7 @@ so it doesn't let you reverse a MIDI or change the duration of notes or the temp
 That would be a bit more complicated than just updating pitches.
 But updating pitches wasn't that hard, so...
 
-* MidiFlip doesn't handle pitch bending like [AutoMIDIFlip](http://automidiflip.com/) does.
+* MidiFlip doesn't handle pitch bending and portamenti like [AutoMIDIFlip](http://automidiflip.com/) does.
 
 
 ## CLI Installation

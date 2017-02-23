@@ -93,13 +93,22 @@
 	Drag and drop some MIDI files or
 	<a role="button" href="#" id="select-files" accept="audio/midi">select files</a>
 	to transform.
+	<!-- FIXME: this text and button are now too far away from the results,
+	and there's a "Transformation" section that doesn't have the button
+	to select files to do the actual transformation.
+	I could move it down to the bottom,
+	maybe put it under the section with the results but with a different heading? -->
 </p>
 <p>
 	You can then download the files individually or as a zip,
 	and try changing the transformation function.
 </p>
-<h3>Transformation</h3>
+<h3>Transformation</h3> <!-- TODO: maybe "Settings" -->
 <!-- TODO: presets dropdown -->
+<!-- Channel splitting: (n + (channel - 4) * 12) mod (127 - 12 * 2) -->
+<!-- Transpose: n + 3 -->
+<!-- Octave up: n + 12 -->
+<!-- Octave down: n + 12 -->
 <!-- (maybe save Custom preset automatically) -->
 <p>
 	<label>
@@ -112,13 +121,14 @@
 	<b>n</b> = the note number from 0 to 127;
 	<b>channel</b> = the channel number from 0 to 16
 </p>
-<!-- TODO: -->
-<!--<p>-->
-<!--	<label>-->
-<!--		<input type="checkbox" id="mess-with-percussion"/>-->
-<!--		Purposefully mess with percussion-->
-<!--	</label>-->
-<!--</p>-->
+<p>
+	<label>
+		<input type="checkbox" id="mess-with-percussion"/>
+		Purposefully mess with percussion
+	</label>
+	<br>
+	(Percussion is not always recognized and may be mangled regardless.)
+</p>
 <output id="results-container" hidden>
 	<h3>Results</h3>
 	<ul id="output-list"></ul>

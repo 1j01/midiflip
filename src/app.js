@@ -7,9 +7,17 @@ var results_zipped_container_el = document.querySelector("#results-zipped-contai
 var results_container_el = document.querySelector("#results-container");
 var clear_results_el = document.querySelector("#clear-results");
 var transform_function_input = document.querySelector("#transform-function");
-// var mess_with_percussion_checkbox = document.querySelector("mess-with-percussion");
+var mess_with_percussion_checkbox = document.querySelector("#mess-with-percussion");
 
-var get_fn_from_input = function(){
+var fn;
+var mess_with_percussion;
+
+var results = [];
+var zip_blob_url = null;
+
+var update_from_settings = function(){
+	mess_with_percussion = mess_with_percussion_checkbox.checked;
+	
 	var expr = transform_function_input.value || transform_function_input.placeholder;
 	try {
 		var code = math.compile(expr);
@@ -19,13 +27,9 @@ var get_fn_from_input = function(){
 			throw e;
 		};
 	}
-	return function(n, event){
-		return code.eval({n: n, channel: event.channel})
+	fn = function(n, event){
+		return code.eval({n: n, channel: event.channel});
 	};
-};
-var fn = get_fn_from_input();
-transform_function_input.addEventListener("change", function(){
-	fn = get_fn_from_input();
 	
 	results_zipped_container_el.setAttribute("hidden", "hidden");
 	output_zipped_el.innerHTML = "";
@@ -35,11 +39,7 @@ transform_function_input.addEventListener("change", function(){
 	}, function(err) {
 		maybe_create_zip();
 	});
-});
-
-
-var results = [];
-var zip_blob_url = null;
+};
 
 var clear_results = function() {
 	for (var i = 0; i < results.length; i++) {
@@ -102,7 +102,7 @@ var add_file = function(file, callback) {
 		a.removeAttribute("href");
 		
 		try {
-			var result_array_buffer = midiflip(result.input_array_buffer, fn);
+			var result_array_buffer = midiflip(result.input_array_buffer, fn, mess_with_percussion);
 			result.blob = new Blob([result_array_buffer], {type: "audio/midi"});
 			result.blob_url = URL.createObjectURL(result.blob);
 		} catch(e) {
@@ -220,3 +220,7 @@ var create_zip = function() {
 		error_el.textContent = error;
 	});
 };
+
+update_from_settings();
+transform_function_input.addEventListener("change", update_from_settings);
+mess_with_percussion_checkbox.addEventListener("change", update_from_settings);
