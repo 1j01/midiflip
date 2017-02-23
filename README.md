@@ -14,9 +14,6 @@ You can batch convert files and download the results as a zip file.
 
 ## Limitations
 
-* The web interface only lets you apply the most basic flip for now.
-(I just haven't added UI for changing the transformation function yet.)
-
 * Percussion using the [drum kits of the "drum bank"](https://en.wikipedia.org/wiki/General_MIDI_Level_2#Drum_sounds)
 gets mangled regardless of the `--percussion` option.
 Only channel 10 (which is reserved for percussion) is regarded as percussion for now.
@@ -52,7 +49,7 @@ and on probably most other operating systems, just
 `cd ~/Music`
 
 ### Flip a single file:
-`midiflip -i "midis/Danger.mid" -o "transformed.mid"`
+`midiflip -i "midis/Danger.mid" -o "transformed/Danger.mid"`
 
 ### Flip a bunch of files:
 `midiflip -i "midis/**/*.mid" -o "transformed/"`

@@ -6,6 +6,7 @@
 <script src="lib/midi/MIDIEvents.js"></script>
 <script src="lib/midi/MIDIFile.js"></script>
 <script src="src/midiflip.js"></script>
+<script src="lib/math.min.js"></script>
 <script src="lib/async.js"></script>
 <script src="lib/zip-js/zip.js"></script>
 <script>zip.workerScriptsPath = "lib/zip-js/";</script>
@@ -52,6 +53,8 @@
 	}
 	h2 {
 		font-size: 2em;
+		/*font-size: 1.7em;*/
+		/*margin-top: 0;*/
 	}
 	h3 {
 		font-size: 1.7em;
@@ -91,6 +94,31 @@
 	<a role="button" href="#" id="select-files" accept="audio/midi">select files</a>
 	to transform.
 </p>
+<p>
+	You can then download the files individually or as a zip,
+	and try changing the transformation function.
+</p>
+<h3>Transformation</h3>
+<!-- TODO: presets dropdown -->
+<!-- (maybe save Custom preset automatically) -->
+<p>
+	<label>
+		Mathematical expression:
+		<input type="text" value="127 - n" placeholder="127 - n" id="transform-function"/>
+	</label>
+	<br>
+	See <a href="http://mathjs.org/docs/expressions/syntax.html">mathjs syntax</a>.
+	Available variables:
+	<b>n</b> = the note number from 0 to 127;
+	<b>channel</b> = the channel number from 0 to 16
+</p>
+<!-- TODO: -->
+<!--<p>-->
+<!--	<label>-->
+<!--		<input type="checkbox" id="mess-with-percussion"/>-->
+<!--		Purposefully mess with percussion-->
+<!--	</label>-->
+<!--</p>-->
 <output id="results-container" hidden>
 	<h3>Results</h3>
 	<ul id="output-list"></ul>

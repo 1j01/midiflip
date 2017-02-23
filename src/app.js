@@ -6,10 +6,37 @@ var output_zipped_el = document.querySelector("#output-zipped");
 var results_zipped_container_el = document.querySelector("#results-zipped-container");
 var results_container_el = document.querySelector("#results-container");
 var clear_results_el = document.querySelector("#clear-results");
+var transform_function_input = document.querySelector("#transform-function");
+// var mess_with_percussion_checkbox = document.querySelector("mess-with-percussion");
 
-var fn = function(n) {
-	return 127 - n;
+var get_fn_from_input = function(){
+	var expr = transform_function_input.value || transform_function_input.placeholder;
+	try {
+		var code = math.compile(expr);
+	} catch (e) {
+		// TODO: show this error somewhere even if there are no results?
+		return function(){
+			throw e;
+		};
+	}
+	return function(n, event){
+		return code.eval({n: n, channel: event.channel})
+	};
 };
+var fn = get_fn_from_input();
+transform_function_input.addEventListener("change", function(){
+	fn = get_fn_from_input();
+	
+	results_zipped_container_el.setAttribute("hidden", "hidden");
+	output_zipped_el.innerHTML = "";
+	
+	async.each(results, function(result, callback){
+		result.compute(callback);
+	}, function(err) {
+		maybe_create_zip();
+	});
+});
+
 
 var results = [];
 var zip_blob_url = null;
@@ -64,15 +91,24 @@ var add_file = function(file, callback) {
 	
 	result.element = li;
 	
-	var file_reader = new FileReader();
-	file_reader.onload = function() {
+	result.compute = function(callback) {
+		
+		// reset from possible previous computation
+		result.error = null;
+		if(result.error_element){
+			result.error_element.parentElement.removeChild(result.error_element);
+			result.error_element = null;
+		}
+		a.removeAttribute("href");
+		
 		try {
-			var result_array_buffer = midiflip(this.result, fn);
+			var result_array_buffer = midiflip(result.input_array_buffer, fn);
 			result.blob = new Blob([result_array_buffer], {type: "audio/midi"});
 			result.blob_url = URL.createObjectURL(result.blob);
 		} catch(e) {
 			result.error = e;
 		}
+		
 		if (result.error) {
 			li.classList.add("failed");
 			var error_el = document.createElement("div");
@@ -83,25 +119,30 @@ var add_file = function(file, callback) {
 			} else {
 				error_el.textContent = result.error;
 			}
+			result.error_element = error_el
 		} else {
 			a.href = result.blob_url;
 		}
+		
 		callback();
+	};
+	
+	var file_reader = new FileReader();
+	file_reader.onload = function() {
+		result.input_array_buffer = this.result;
+		result.compute(callback);
 	};
 	file_reader.readAsArrayBuffer(file);
 };
 
 var add_files = function(files) {
+	// TODO: maybe accept zip files
 	if (files.length == 0) {
 		return;
 	}
 	results_container_el.removeAttribute("hidden");
 	async.each(files, add_file, function(err) {
-		// NOTE: we create a zip file if there's only one file
-		// for feature visibility, and general consistency
-		if (results.some(function(result) { return result.blob; })) {
-			create_zip();
-		}
+		maybe_create_zip();
 	});
 };
 
@@ -120,6 +161,14 @@ drop_area_el.addEventListener("drop", function (e) {
 	e.preventDefault();
 	add_files(e.dataTransfer.files);
 }, false);
+
+var maybe_create_zip = function(){
+	// NOTE: we create a zip file if there's only one file
+	// for feature visibility, and general consistency
+	if (results.some(function(result) { return result.blob; })) {
+		create_zip();
+	}
+};
 
 var create_zip = function() {
 	
