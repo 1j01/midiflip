@@ -17,13 +17,22 @@
 		height: 100%;
 		margin: 0;
 		padding: 0;
+		display: flex;
+		flex-direction: column;
 	}
 	body {
 		background: #00BCD4;
 		color: white;
 		font-family: sans-serif;
-		padding: 1em;
+		padding: 0 1rem;
 	    box-sizing: border-box;
+	}
+	main {
+		flex: 1 0 auto;
+	}
+	footer {
+		text-align: center;
+		padding-bottom: 1rem;
 	}
 	h1, h2, h3, h4, h5, h6, p, #clear-results {
 		margin: 1.5rem 0;
@@ -72,8 +81,11 @@
 		float: right;
 	}
 </style>
-<h1>MidiFlip</h1>
-<h2>Transform MIDI files mathematically</h2>
+<header>
+	<h1>MidiFlip</h1>
+	<h2>Transform MIDI files mathematically</h2>
+</header>
+<main>
 <p>
 	Drag and drop some MIDI files or
 	<a role="button" href="#" id="select-files" accept="audio/midi">select files</a>
@@ -88,6 +100,14 @@
 		<button id="clear-results">Clear Results</button>
 	</div>
 </output>
+</main>
+<footer>
+	<p>
+		Made by <a href="http://1j01.github.io/">Isaiah Odhner</a>.
+		Open source <a href="https://github.com/1j01/midiflip">on GitHub</a>.
+	</p>
+</footer>
 
 <script src="src/app.js"></script>
+
 </body>
