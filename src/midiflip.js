@@ -28,9 +28,7 @@
 				var event = events[i];
 				if(event.type === MIDIEvents.EVENT_MIDI){
 					if(event.subtype === MIDIEvents.EVENT_MIDI_NOTE_OFF || event.subtype === MIDIEvents.EVENT_MIDI_NOTE_ON){
-						var isPercussion = event.channel === 10; // Channel 11
-						// TODO:
-						// var isPercussion = event.channel === 9 || event.channel === 10; // Channel 10 or 11
+						var isPercussion = event.channel === 9 || event.channel === 10; // Channel 10 or 11
 						// NOTE: I don't think channel 11 (coded 10) is guaranteed to be percussion.
 						if(!isPercussion || mess_with_percussion){
 							event.param1 = fn(event.param1, {channel: event.channel, isPercussion: isPercussion});

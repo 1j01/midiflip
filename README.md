@@ -16,12 +16,6 @@ The web interface supports everything the CLI does (and more at the moment).
 
 ## Limitations
 
-* ~~Percussion using the [drum kits of the "drum bank"](https://en.wikipedia.org/wiki/General_MIDI_Level_2#Drum_sounds)
-gets affected regardless of the "purposefully mess with percussion" option.~~
-Only MIDI channel 11 (which is not reserved for percussion) is regarded as percussion currently.
-MIDI channel 10 (which *is* reserved for percussion) is not.
-I'm gonna go fix that now.
-
 * You can only look at and change a single note at a time with the current API.
 It would be good to be able to look at the original song as a whole in order to
 transpose notes back to reasonable ranges like [Automatic MIDI Inverter](https://midi-inverter.herokuapp.com/) does,
