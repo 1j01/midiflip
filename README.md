@@ -11,22 +11,30 @@ but it also gives you raw control over the notes in a simple way so you can make
 You can batch convert files and download the results as a zip file.
 (The files are not uploaded to a server.)
 
-The web interface supports everything the CLI does (and more at the moment).
+The web interface supports everything the CLI does (and actually more at the moment).
 
 
-## Limitations
+## Future Direction
 
-* You can only look at and change a single note at a time with the current API.
 It would be good to be able to look at the original song as a whole in order to
 transpose notes back to reasonable ranges like [Automatic MIDI Inverter](https://midi-inverter.herokuapp.com/) does,
 or do fancier stuff like finding the scale used and mapping it to another.
+(You can only look at and change a single note at a time with the current API.)
 
-* MidiFlip doesn't deal with time at all,
-so it doesn't let you reverse a MIDI or change the duration of notes or the tempo.
-That would be a bit more complicated than just updating pitches.
-But updating pitches wasn't that hard, so...
+MidiFlip could also let you deal in time,
+reversing a song or changing the tempo,
+altering the duration of notes,
+humanizing or quantizing,
+stuff like that.
 
-* MidiFlip doesn't handle pitch bending and portamenti like [AutoMIDIFlip](http://automidiflip.com/) does.
+It would probably make sense to have two levels of configuration,
+one where you just define a mapping,
+and that could be visualized,
+and one where you just write code to modify the MIDI.
+Either way the results could be visualized, with an embedded MIDI player.
+
+Could handle inverting pitch bends and portamenti like [AutoMIDIFlip](http://automidiflip.com/) does.
+This would be optional, since you can specify transformations such as simple transpositions.
 
 
 ## CLI Installation
@@ -64,7 +72,7 @@ rather than `transformed/midis/Avgvst/FreeRide.mid`
 
 ### Purposefully mess with percussion
 
-Add `-p` or `--percussion` to apply the same transformation to the percussion channel as to other notes,
+Add `-p` or `--percussion` to apply the same transformation to percussion as to other notes,
 which doesn't make the semantic sense that applying it to pitch does.
 
 
