@@ -31,6 +31,8 @@
 						var isPercussion = event.channel === 9 || event.channel === 10; // Channel 10 or 11
 						// NOTE: I don't think channel 11 (coded 10) is guaranteed to be percussion.
 						if(!isPercussion || mess_with_percussion){
+							// TODO: account for randomness in fn by transforming NOTEOFFs the same as the previous NOTEON
+							// can keep a map of midi note numbers to what the previous NOTEON was transformed to
 							event.param1 = fn(event.param1, {channel: event.channel, isPercussion: isPercussion});
 						}
 					}

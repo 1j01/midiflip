@@ -6,7 +6,9 @@ var output_zipped_el = document.querySelector("#output-zipped");
 var results_zipped_container_el = document.querySelector("#results-zipped-container");
 var results_container_el = document.querySelector("#results-container");
 var clear_results_el = document.querySelector("#clear-results");
-var transform_function_input = document.querySelector("#transform-function");
+var transform_expression_input = document.querySelector("#transform-expression");
+var transform_preset_select = document.querySelector("#transform-presets");
+var custom_transform_option = document.querySelector("#custom-transform");
 var mess_with_percussion_checkbox = document.querySelector("#mess-with-percussion");
 
 var fn;
@@ -18,7 +20,14 @@ var zip_blob_url = null;
 var update_from_settings = function(){
 	mess_with_percussion = mess_with_percussion_checkbox.checked;
 	
-	var expr = transform_function_input.value || transform_function_input.placeholder;
+	if (transform_expression_input.value != transform_preset_select.querySelector("option:checked").value) {
+		custom_transform_option.selected = true;
+		custom_transform_option.value = transform_expression_input.value;
+		// NOTE: "Custom" gets overridden if you edit any preset
+		// TODO: maybe persist custom preset(s)?
+	}
+	
+	var expr = transform_expression_input.value || transform_expression_input.placeholder;
 	try {
 		var code = math.compile(expr);
 	} catch (e) {
@@ -222,5 +231,10 @@ var create_zip = function() {
 };
 
 update_from_settings();
-transform_function_input.addEventListener("change", update_from_settings);
+transform_expression_input.addEventListener("change", update_from_settings);
 mess_with_percussion_checkbox.addEventListener("change", update_from_settings);
+transform_preset_select.addEventListener("change", function() {
+	transform_expression_input.value = transform_preset_select.querySelector("option:checked").value;
+	// transform_expression_input.value = transform_preset_select.options[transform_preset_select.selectedIndex].value;
+	update_from_settings();
+});

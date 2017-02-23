@@ -93,29 +93,48 @@
 	Drag and drop some MIDI files or
 	<a role="button" href="#" id="select-files" accept="audio/midi">select files</a>
 	to transform.
-	<!-- FIXME: this text and button are now too far away from the results,
-	and there's a "Transformation" section that doesn't have the button
-	to select files to do the actual transformation.
+	<!-- FIXME: the file selection button and drag and drop text are now too far away from the results.
 	I could move it down to the bottom,
-	maybe put it under the section with the results but with a different heading? -->
+	maybe put it under the section with the results
+	but with a different heading than "Results"? -->
 </p>
 <p>
-	You can then download the files individually or as a zip,
-	and try changing the transformation function.
+	You can then download the files individually or as a zip.
+	If you change the settings, the results will be updated automatically.
 </p>
-<h3>Transformation</h3> <!-- TODO: maybe "Settings" -->
-<!-- TODO: presets dropdown -->
-<!-- Channel splitting: (n + (channel - 4) * 12) mod (127 - 12 * 2) -->
-<!-- Transpose: n + 3 -->
-<!-- Octave up: n + 12 -->
-<!-- Octave down: n + 12 -->
-<!-- (maybe save Custom preset automatically) -->
+<h3>Settings</h3>
 <p>
 	<label>
-		Mathematical expression:
-		<input type="text" value="127 - n" placeholder="127 - n" id="transform-function"/>
+		Transform (mathematical expression): <b>n′</b> =
+		<input type="text" value="127 - n" placeholder="127 - n" id="transform-expression"/>
 	</label>
-	<br>
+	<label>
+		Preset:
+		<select id="transform-presets">
+			<option value="n">No Transform</option>
+			<option value="127 - n" selected>Basic Flip</option>
+			<!--TODO:-->
+			<!--<option value="center - n" selected>Standard Flip</option>-->
+			<!--<option value="127 - n">Absolute Flip</option>-->
+			<option value="n + 12">Transpose: octave up</option>
+			<option value="n - 12">Transpose: octave down</option>
+			<option value="n + 3">Transpose: 3 semitones up</option>
+			<option value="n - 8">Transpose: 8 semitones down</option>
+			<option value="60">Make All Notes Middle C</option> <!-- hear the rhythm in isolation -->
+			<option value="(n + channel * 12) mod 127">Simple Octave Channel-Split</option>
+			<option value="(n + (channel - 4) * 12) mod (127 - 12 * 2)">Nicer Octave Channel-Split</option>
+			<option value="floor(n / 12 * 8) * 12 / 8">Pitch Quantization: 8 notes/octave</option>
+			<option value="floor(n / 12 * 5) * 12 / 5">Pitch Quantization: 5 notes/octave</option>
+			<option value="n / 12 * 8 + 20">Squishy Pitch Quantization</option>
+			<!-- Can use sin/cos/whatever for psuedorandom mapping -->
+			<!-- or random() for (still technically psuedo-)randomness -->
+			<!-- random octave jumps: n + floor(random(2)) * 12 -->
+			<!-- something: ((n mod 12) * (n |^ 12) - n + 127) mod 127 -->
+			<option value="" id="custom-transform">Custom</option>
+		</select>
+	</label>
+</p>
+<p>
 	See <a href="http://mathjs.org/docs/expressions/syntax.html">mathjs syntax</a>.
 	Available variables:
 	<b>n</b> = the note number from 0 to 127;
@@ -126,8 +145,19 @@
 		<input type="checkbox" id="mess-with-percussion"/>
 		Purposefully mess with percussion
 	</label>
-	<br>
-	(Percussion is not always recognized and may be mangled regardless.)
+	<!--
+	TODO: have two separately configurable transforms for perussion and non-percussion notes like:
+		[x] Transform pitches      [Preset        v]    n′ = [127 - n          ]
+		[x] Transform percussion   [Preset        v]    n′ = [127 - n          ]
+	Or even just:
+		Pitch transform:       [Basic Flip        v]    n′ = [127 - n          ]
+		Percussion transform:  [No Transform      v]    n′ = [n                ]
+	"Percussion transform" doesn't roll off the tounge
+	It could still be:
+		Transform pitches:     [Basic Flip        v]    n′ = [127 - n          ]
+		Transform percussion:  [No Transform      v]    n′ = [n                ]
+	But then  again checkboxes are probably good
+	-->
 </p>
 <output id="results-container" hidden>
 	<h3>Results</h3>
