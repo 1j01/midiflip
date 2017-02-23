@@ -43,7 +43,8 @@ select_files_el.addEventListener("click", select_files);
 
 var add_file = function(file, callback) {
 	
-	var result = {file_name: file.name.replace(/\.midi?/, ".transformed.mid")};
+	var bare_file_name = file.name.replace(/\.midi?/, "")
+	var result = {file_name: bare_file_name + ".transformed.mid"};
 	results = results.filter(function(old_result) {
 		var match = old_result.file_name == result.file_name
 		if (match) {
@@ -58,8 +59,8 @@ var add_file = function(file, callback) {
 	output_list_el.appendChild(li);
 	var a = document.createElement("a");
 	li.appendChild(a);
-	a.textContent = file.name.replace(/\.midi?/, "");
-	a.download = file.name;
+	a.textContent = bare_file_name;
+	a.download = result.file_name;
 	
 	result.element = li;
 	
