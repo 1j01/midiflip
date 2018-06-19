@@ -65,7 +65,8 @@ var clear_results = function() {
 
 clear_results_el.addEventListener("click", clear_results);
 
-var select_files = function() {
+select_files_el.addEventListener("click", function(e) {
+	e.preventDefault();
 	var files_input_el = document.createElement("input");
 	files_input_el.setAttribute("type", "file");
 	files_input_el.setAttribute("multiple", "multiple");
@@ -74,9 +75,7 @@ var select_files = function() {
 		add_files(this.files);
 	});
 	files_input_el.click();
-};
-
-select_files_el.addEventListener("click", select_files);
+});
 
 var add_file = function(file, callback) {
 	
