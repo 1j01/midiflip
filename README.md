@@ -7,7 +7,7 @@ MidiFlip can be used to simply flip notes around,
 inverting all the pitches,
 but it also gives you raw control over the notes in a simple way so you can make arbitrary remappings.
 
-[Try MidiFlip online.](http://1j01.github.io/midiflip/)
+[Try MidiFlip online.](https://1j01.github.io/midiflip/)
 You can batch convert files and download the results as a zip file.
 (The files are not uploaded to a server.)
 

@@ -6,10 +6,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "http://github.com/1j01/midiflip.git"
+    "url": "https://github.com/1j01/midiflip.git"
   },
   "bugs": {
-    "url": "http://github.com/1j01/midiflip/issues"
+    "url": "https://github.com/1j01/midiflip/issues"
   },
   "keywords": [
     "midi",
