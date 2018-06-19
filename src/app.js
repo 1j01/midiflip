@@ -69,6 +69,7 @@ var select_files = function() {
 	var files_input_el = document.createElement("input");
 	files_input_el.setAttribute("type", "file");
 	files_input_el.setAttribute("multiple", "multiple");
+	files_input_el.setAttribute("accept", "audio/midi, *.midi, *.mid");
 	files_input_el.addEventListener("change", function() {
 		add_files(this.files);
 	});
