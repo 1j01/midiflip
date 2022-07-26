@@ -2,7 +2,7 @@
   "name": "midiflip",
   "version": "0.3.0",
   "description": "Transform MIDI files mathematically",
-  "author": "Isaiah Odhner <isaiahodhner@gmail.com>",
+  "author": "Isaiah Odhner <isaiah.odhner@gmail.com> (https://isaiahodhner.io)",
   "license": "MIT",
   "repository": {
     "type": "git",
