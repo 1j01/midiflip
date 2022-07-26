@@ -119,8 +119,8 @@
 			<option value="floor(n / 12 * 8) * 12 / 8">Pitch Quantization: 8 notes/octave</option>
 			<option value="floor(n / 12 * 5) * 12 / 5">Pitch Quantization: 5 notes/octave</option>
 			<option value="n / 12 * 8 + 20">Squishy Pitch Quantization</option>
-			<!-- Can use sin/cos/whatever for psuedorandom mapping -->
-			<!-- or random() for (still technically psuedo-)randomness -->
+			<!-- Can use sin/cos/whatever for pseudorandom mapping -->
+			<!-- or random() for (still technically pseudo-)randomness -->
 			<!-- random octave jumps: n + floor(random(2)) * 12 -->
 			<!-- something: ((n mod 12) * (n |^ 12) - n + 127) mod 127 -->
 			<option value="" id="custom-transform">Custom</option>
@@ -139,13 +139,13 @@
 		Purposefully mess with percussion
 	</label>
 	<!--
-	TODO: have two separately configurable transforms for perussion and non-percussion notes like:
+	TODO: have two separately configurable transforms for percussion and non-percussion notes like:
 		[x] Transform pitches      [Preset        v]    n′ = [127 - n          ]
 		[x] Transform percussion   [Preset        v]    n′ = [127 - n          ]
 	Or even just:
 		Pitch transform:       [Basic Flip        v]    n′ = [127 - n          ]
 		Percussion transform:  [No Transform      v]    n′ = [n                ]
-	"Percussion transform" doesn't roll off the tounge
+	"Percussion transform" doesn't roll off the tongue
 	It could still be:
 		Transform pitches:     [Basic Flip        v]    n′ = [127 - n          ]
 		Transform percussion:  [No Transform      v]    n′ = [n                ]
